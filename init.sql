@@ -6,8 +6,7 @@ CREATE TABLE IF NOT EXISTS users (
     email VARCHAR(100) UNIQUE NOT NULL,
     password_hash VARCHAR(255) NOT NULL,
     wallet_address VARCHAR(42),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS chat_sessions (
@@ -26,15 +25,16 @@ CREATE TABLE IF NOT EXISTS chat_messages (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-    CREATE TABLE IF NOT EXISTS transactions (
+CREATE TABLE IF NOT EXISTS agent_configs (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     user_id UUID REFERENCES users(id) ON DELETE CASCADE,
-    from_address VARCHAR(42) NOT NULL,
-    to_address VARCHAR(42) NOT NULL,
-    amount DECIMAL(20, 8) NOT NULL,
-    currency VARCHAR(10) NOT NULL,
-    transaction_hash VARCHAR(66),
-    status VARCHAR(20) DEFAULT 'pending' CHECK (status IN ('pending', 'confirmed', 'failed')),
+    selected_model VARCHAR(100) NOT NULL,
+    api_key TEXT NOT NULL,
+    modules_config JSON,
+    prompt TEXT,
+    name VARCHAR(100) NOT NULL DEFAULT 'Mon Assistant',
+    is_active BOOLEAN DEFAULT true,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    description TEXT
 );
