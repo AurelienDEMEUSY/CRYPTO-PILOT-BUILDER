@@ -369,11 +369,11 @@ export default {
       localPrompt: "",
       suggestions: {
         "assistant-general":
-          "Tu es un assistant IA polyvalent et bienveillant. Tu réponds de manière claire, précise et utile à toutes les questions. Tu adoptes un ton professionnel mais chaleureux, et tu t'adaptes au niveau de connaissance de l'utilisateur. Tu fournis des exemples concrets quand c'est pertinent.",
+          "Tu es un agent IA crypto polyvalent, fiable, proactif et bienveillant. Tu réponds de manière claire, précise et utile, en t'adaptant au contexte, au niveau de connaissance et aux objectifs de l'utilisateur (débutant, investisseur, développeur, trader, etc.). Tu couvres l'ensemble des domaines liés à la crypto et à la blockchain (DeFi, trading, wallets, smart contracts, NFT, sécurité, écosystèmes EVM/non-EVM, réglementation, actualité technique et économique). Ton ton est professionnel, accessible et rigoureux, mais tu restes synthétique. Tu expliques les termes complexes, tu peux simplifier sans perdre en exactitude. Tu donnes des exemples concrets ou des cas d’usage quand c’est pertinent.Si une question est ambiguë, tu poses des clarifications pour mieux aider. Tu peux formuler des suggestions ou bonnes pratiques si cela ajoute de la valeur.",
         "assistant-technique":
-          "Tu es un assistant technique spécialisé en développement et technologies. Tu réponds avec précision en fournissant du code, des solutions pratiques et des explications détaillées. Tu utilises un langage technique approprié et proposes toujours des alternatives quand c'est possible.",
+          "Tu es un assistant technique expert en développement Blockchain et technologies Web3. Tu réponds avec précision, clarté et rigueur, en fournissant du code fonctionnel, des solutions pratiques, et des explications détaillées adaptées au niveau de l’utilisateur (débutant, développeur Web3, smart contract engineer, architecte blockchain, etc.). Tu maîtrises les écosystèmes EVM (Solidity, Hardhat, Foundry), non-EVM (Solana, Cosmos, Qubic, etc.), les standards (ERC, SPL), les smart contracts, les bridges, la DeFi, les wallets, les oracles, les rollups, les Layer 2 et la sécurité on-chain/off-chain. Tu utilises un langage technique précis mais accessible, et tu t’adaptes au contexte (POC, audit, app décentralisée, script automation, etc.). Tu fournis des exemples de code clairs, commentés si besoin, et tu expliques les choix techniques. Tu proposes toujours des alternatives ou optimisations possibles, tu identifies les pièges fréquents, et tu peux suggérer des outils, frameworks ou bibliothèques pertinents. Tu peux aussi aider à la structuration de projets, à la conception d’architectures Web3, ou à l’intégration avec des services off-chain.",
         "assistant-creatif":
-          "Tu es un assistant créatif spécialisé dans la génération de contenu artistique et innovant. Tu adoptes un ton inspirant et imaginatif, tu proposes des idées originales et tu encourages la créativité. Tu sais adapter ton style selon le type de création demandé.",
+          "Tu es un assistant créatif spécialisé dans l’innovation artistique et les expériences Web3. Tu génères des idées originales, audacieuses et réalisables autour de la blockchain, des NFTs, du metaverse, des jeux décentralisés, de l’art génératif, des expériences immersives ou interactives. Tu adoptes un ton inspirant, imaginatif et stimulant, et tu t’adaptes au style, au public et au format de création demandé (storytelling, concept de dApp artistique, collection NFT, pitch créatif, design narratif, etc.). Tu encourages l’expérimentation et la créativité, tout en proposant des concepts concrets, exploitables techniquement. Tu peux intégrer des références culturelles, technologiques ou esthétiques, et tu suggères des outils ou technologies (ex : moteurs graphiques, plateformes NFT, langages créatifs, IA générative). Tu aides à mettre en forme les idées pour qu’elles soient à la fois innovantes et compréhensibles, et tu es capable d’explorer les synergies entre l’art, la technologie et les communautés.",
       },
     };
   },
@@ -452,33 +452,47 @@ export default {
   margin: 0;
   padding: 20px;
   box-sizing: border-box;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #111421 0%, #111421 100%);
   display: flex;
   flex-direction: column;
   position: fixed;
   top: 0;
   left: 0;
   overflow-y: auto;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
+  font-family: 'Roboto', sans-serif;
+  overflow-x: hidden;
 }
 
 .page-content {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 40px;
   margin: 30px auto;
   max-width: 900px;
   width: 100%;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
   animation: slideUp 0.6s ease-out;
   box-sizing: border-box;
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: relative;
+}
+
+.page-content::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
+  transform: rotate(45deg);
+  pointer-events: none;
 }
 
 @keyframes slideUp {
@@ -494,62 +508,65 @@ export default {
 
 .header-section {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .page-title {
   font-size: 2.5rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   margin: 0 0 10px 0;
   letter-spacing: -0.02em;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
 .page-subtitle {
-  color: #64748b;
+  color: rgba(255, 255, 255, 0.8);
   font-size: 1.1rem;
   margin: 0;
   font-weight: 500;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
 }
 
 .prompt-section,
 .summary-section {
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
   padding: 25px;
   border-radius: 20px;
   text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  color: #f3e8ff;
 }
 
 .prompt-section::before,
 .summary-section::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  transform: translateX(-100%);
-  transition: transform 0.4s ease;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 80%);
+  transition: left 0.5s ease;
 }
 
 .prompt-section:hover::before,
 .summary-section:hover::before {
-  transform: translateX(0);
-}
-
-.prompt-section:hover,
-.summary-section:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  left: 100%;
 }
 
 .prompt-icon,
@@ -561,44 +578,45 @@ export default {
   color: white;
   margin-bottom: 15px;
   transition: transform 0.3s ease;
-}
-
-.prompt-section:hover .prompt-icon,
-.summary-section:hover .prompt-icon {
-  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
 .prompt-title h3 {
   font-size: 1.3rem;
   font-weight: 700;
-  color: #1e293b;
+  color: #f3e8ff;
   margin: 0 0 10px 0;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
 }
 
 .prompt-textarea {
   width: 100%;
   min-height: 200px;
   padding: 20px;
-  border: 2px solid #e2e8f0;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 16px;
-  font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 15px;
   line-height: 1.6;
   resize: vertical;
   box-sizing: border-box;
   transition: all 0.3s ease;
-  background: #fafbfc;
-  color: #334155;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  color: white;
   position: relative;
   z-index: 1;
 }
 
+.prompt-textarea::placeholder {
+  color: #f3e8ff;
+}
+
 .prompt-textarea:focus {
   outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1),
-    0 4px 12px rgba(102, 126, 234, 0.2);
-  background: white;
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 8px rgba(118, 75, 162, 0.3);
   transform: translateY(-2px);
 }
 
@@ -609,7 +627,7 @@ export default {
   right: -1px;
   bottom: -1px;
   border-radius: 16px;
-  background: linear-gradient(135deg, #667eea, #764ba2, #10b981);
+  background: linear-gradient(120deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 80%);
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
@@ -617,12 +635,12 @@ export default {
 }
 
 .prompt-textarea:focus + .textarea-decoration {
-  opacity: 0.1;
+  opacity: 1;
 }
 
 .character-count {
   font-size: 14px;
-  color: #64748b;
+  color: rgba(255, 255, 255, 0.7);
   font-weight: 500;
 }
 
@@ -636,10 +654,10 @@ export default {
 
 .suggestion-btn {
   padding: 8px 16px;
-  background: #f1f5f9;
-  border: 1px solid #e2e8f0;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
-  color: #475569;
+  color: #f3e8ff;
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
@@ -647,22 +665,18 @@ export default {
   position: relative;
   overflow: hidden;
   z-index: 1;
+  backdrop-filter: blur(10px);
 }
 
 .suggestion-btn::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(102, 126, 234, 0.1),
-    transparent
-  );
-  transition: left 0.4s ease;
+  background: linear-gradient(120deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 80%);
+  transition: left 0.5s ease;
   z-index: -1;
 }
 
@@ -671,9 +685,9 @@ export default {
 }
 
 .suggestion-btn:hover {
-  background: #e2e8f0;
-  border-color: #cbd5e1;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .summary-status {
@@ -684,16 +698,17 @@ export default {
   border-radius: 12px;
   font-size: 14px;
   font-weight: 600;
-  background: #fef3c7;
-  color: #92400e;
-  border: 1px solid #fcd34d;
+  background: rgba(118, 75, 162, 0.2);
+  color: #e9d5ff;
+  border: 1px solid rgba(118, 75, 162, 0.3);
   transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
 }
 
 .summary-status.complete {
-  background: #dcfce7;
-  color: #166534;
-  border-color: #86efac;
+  background: rgba(22, 163, 74, 0.2);
+  color: #86efac;
+  border-color: rgba(22, 163, 74, 0.3);
 }
 
 .config-card {
@@ -701,17 +716,18 @@ export default {
   align-items: center;
   gap: 15px;
   padding: 20px;
-  background: #fafbfc;
-  border: 1px solid #e2e8f0;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
   transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
 }
 
 .config-card:hover {
-  background: #f8fafc;
-  border-color: #cbd5e1;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .config-icon {
@@ -721,22 +737,24 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: white;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  color: white;
   flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
 .config-content h4 {
   font-size: 1rem;
   font-weight: 600;
-  color: #1e293b;
+  color: #f3e8ff;
   margin: 0 0 4px 0;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
 }
 
 .config-content p {
   font-size: 14px;
-  color: #64748b;
+  color: rgba(255, 255, 255, 0.7);
   margin: 0;
   word-break: break-word;
 }
@@ -748,14 +766,15 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #fef2f2;
-  color: #dc2626;
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
   flex-shrink: 0;
   transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
 .config-status.valid {
-  background: #f0fdf4;
+  background: rgba(22, 163, 74, 0.2);
   color: #16a34a;
 }
 
@@ -780,7 +799,7 @@ export default {
 .btn {
   width: 100%;
   padding: 16px 32px;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 16px;
   font-size: 16px;
   font-weight: 600;
@@ -797,19 +816,15 @@ export default {
 }
 
 .btn::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.2),
-    transparent
-  );
-  transition: left 0.5s;
+  background: linear-gradient(120deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 80%);
+  transition: left 0.5s ease;
+  z-index: -1;
 }
 
 .btn:hover::before {
@@ -817,28 +832,41 @@ export default {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: rgba(118, 75, 162, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   color: white;
-  box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 6px 18px rgba(118, 75, 162, 0.3);
 }
 
-.btn-primary:hover {
+.btn-primary:hover:not(:disabled) {
   transform: translateY(-3px);
-  box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 8px 24px rgba(118, 75, 162, 0.4);
+  background: rgba(118, 75, 162, 0.4);
+}
+
+.btn-primary:disabled {
+  background: rgba(148, 163, 184, 0.2);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .btn-secondary {
-  background: white;
-  color: #64748b;
-  border: 2px solid #e2e8f0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .btn-secondary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  border-color: #cbd5e1;
-  color: #475569;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 @media (max-width: 768px) {
